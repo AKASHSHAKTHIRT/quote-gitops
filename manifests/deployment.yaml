@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quote-gitops
+  labels:
+    app: quote-gitops
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: quote-gitops
+  template:
+    metadata:
+      labels:
+        app: quote-gitops
+    spec:
+      containers:
+        - name: quote-gitops
+          image: rtakashdev/quote-gitops
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "150m"
+              memory: "128Mi"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 20
