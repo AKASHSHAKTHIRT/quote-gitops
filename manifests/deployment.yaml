@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: quote-gitops
-          image: rtakashdev/quote-gitops:99f3767198217919c753cb877d6018ebaa0d2083
+          image: rtakashdev/quote-gitops:a792c083eeb6032223cd5874fdbe1c95a04b3957
           ports:
             - containerPort: 5000
           resources:
